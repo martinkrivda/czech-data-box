@@ -1,0 +1,55 @@
+{
+  "name": "czech-data-box",
+  "version": "0.1.0",
+  "main": "src/index.js",
+  "type": "module",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "mocha"
+  },
+  "keywords": [
+    "ISDS",
+    "Czech",
+    "Data Box",
+    "SOAP",
+    "Node.js",
+    "library",
+    "knihovna",
+    "Datové schránky"
+  ],
+  "author": "Martin Křivda",
+  "license": "MIT",
+  "description": "A Node.js module for interacting with the Czech Data Box system (ISDS).",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/martinkrivda/czech-data-box.git"
+  },
+  "bugs": {
+    "url": "https://github.com/martinkrivda/czech-data-box/issues"
+  },
+  "homepage": "https://github.com/martinkrivda/czech-data-box",
+  "directories": {
+    "lib": "./src/lib",
+    "test": "./test"
+  },
+  "dependencies": {
+    "soap": "^1.0.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.4.0",
+    "@types/eslint__js": "^8.42.3",
+    "@types/eslint-plugin-mocha": "^10.4.0",
+    "@types/sinon": "^17.0.3",
+    "chai": "^5.1.1",
+    "eslint": "^9.4.0",
+    "eslint-plugin-mocha": "^10.4.3",
+    "globals": "^15.3.0",
+    "mocha": "^10.4.0",
+    "prettier": "^3.2.5",
+    "sinon": "^18.0.0"
+  }
+}

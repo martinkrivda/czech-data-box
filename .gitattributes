@@ -1,0 +1,16 @@
+# Normalize text files to LF (Linux/Mac) on all platforms
+* text=auto eol=lf
+
+# Convert text file line endings to lf
+*.js text diff=javascript
+*.graphql diff=graphql
+*.json diff=json
+*.md diff=markdown
+*.wsdl text
+
+# Node.js & npm specific files
+package.json eol=lf
+package-lock.json eol=lf
+yarn.lock eol=lf
+
+vcbuild.bat text eol=crlf
