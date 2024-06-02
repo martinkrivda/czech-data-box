@@ -73,4 +73,4 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License. See the [LICENSE](/LICENSE) file for details.
