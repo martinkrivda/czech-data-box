@@ -17,7 +17,7 @@ This library is used for basic communication with the Information System for Dat
 #### Connecting to a data box
 
 ```node
-import ISDSBox from 'ISDSBox';
+import ISDSBox from 'czech-data-box';
 
 // Create an instance of the ISDSBox
 const isdsBox = new ISDSBox();
