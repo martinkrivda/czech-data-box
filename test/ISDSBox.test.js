@@ -22,7 +22,7 @@ describe('ISDSBox', function () {
   it('should create a message', async function () {
     const dataMessageFiles = [
       {
-        dmFilePath: './communication_test.pdf',
+        dmFilePath: './test/communication_test.pdf',
         dmMimeType: 'application/pdf',
         dmFileMetaType: 'main',
         dmFileDescr: 'file1.pdf',

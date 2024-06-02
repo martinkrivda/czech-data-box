@@ -1,7 +1,7 @@
 // config.js
 import path from 'path';
 
-export const DEBUG = true; // Set to true to enable debug mode globally
+export const DEBUG = false; // Set to true to enable debug mode globally
 
 function getServiceURL(serviceType, loginType, productionMode) {
   let baseURL = 'https://ws1';

@@ -1,3 +1,5 @@
+import forge from 'node-forge';
+
 import ISDSSentOutFiles from './ISDSSentOutFiles.js';
 import ISDSSoapClient from './ISDSSoapClient.js';
 import DataMessage from '../models/DataMessage.js';
@@ -7,22 +9,26 @@ import { DEBUG } from './config.js';
 
 class ISDSBox {
   constructor(
-    logintype,
+    loginType,
     loginname,
     password,
     certfilename,
     privateKey,
-    passphrase,
+    publicKey,
+    passPhrase,
+    pkcs12Certificate,
     production = true,
     debug = DEBUG,
   ) {
     this.productionMode = production;
-    this.loginType = logintype;
+    this.loginType = loginType;
     this.loginName = loginname;
     this.password = password;
     this.certfilename = certfilename;
     this.privateKey = privateKey;
-    this.passphrase = passphrase;
+    this.publicKey = publicKey;
+    this.passPhrase = passPhrase;
+    this.pkcs12Certificate = pkcs12Certificate;
     this.debug = debug;
 
     this.initClients();
@@ -46,11 +52,62 @@ class ISDSBox {
     return this;
   }
 
+  setPublicKey(cert) {
+    this.publicKey = cert;
+    return this;
+  }
+
+  setPrivateKey(pkey) {
+    this.privateKey = pkey;
+    return this;
+  }
+
+  setPassPhrase(passPhrase) {
+    this.passPhrase = passPhrase;
+    return this;
+  }
+
+  setPkcs12Certificate(pkcs12Certificate, passPhrase) {
+    const p12Der = forge.util.decode64(pkcs12Certificate);
+    const p12Asn1 = forge.asn1.fromDer(p12Der);
+    const p12 = forge.pkcs12.pkcs12FromAsn1(p12Asn1, passPhrase);
+
+    let cert;
+    let key;
+
+    // Extract the key and certificate
+    for (const safeContents of p12.safeContents) {
+      for (const safeBag of safeContents.safeBags) {
+        if (safeBag.type === forge.pki.oids.certBag) {
+          cert = forge.pki.certificateToPem(safeBag.cert);
+        } else if (safeBag.type === forge.pki.oids.pkcs8ShroudedKeyBag) {
+          key = forge.pki.privateKeyToPem(safeBag.key);
+        }
+      }
+    }
+
+    if (!cert || !key) {
+      throw new Error('Invalid PKCS12');
+    }
+
+    this.setPublicKey(cert).setPrivateKey(key).setPassPhrase(passPhrase);
+
+    return this;
+  }
+
   loginWithUsernameAndPassword(loginName, password, productionMode = true) {
     this.productionMode = productionMode;
     this.loginType = 0;
     this.loginName = loginName;
     this.password = password;
+    this.initClients();
+    return this;
+  }
+
+  loginWithPkcs12Certificate(certFile, passPhrase, productionMode = true) {
+    this.productionMode = productionMode;
+    this.loginType = 1;
+    this.setPkcs12Certificate(certFile, passPhrase);
     this.initClients();
     return this;
   }
@@ -84,30 +141,50 @@ class ISDSBox {
       login: this.loginName,
       password: this.password,
       location: getServiceURL(0, this.loginType, this.productionMode),
+      loginType: this.loginType,
+      privateKey: this.privateKey,
+      publicKey: this.publicKey,
+      passPhrase: this.passPhrase,
       debug: this.debug,
     });
     this.infoWS = new ISDSSoapClient(getServiceWSDL(1), {
       login: this.loginName,
       password: this.password,
       location: getServiceURL(1, this.loginType, this.productionMode),
+      loginType: this.loginType,
+      privateKey: this.privateKey,
+      publicKey: this.publicKey,
+      passPhrase: this.passPhrase,
       debug: this.debug,
     });
     this.manipulationsWS = new ISDSSoapClient(getServiceWSDL(2), {
       login: this.loginName,
       password: this.password,
       location: getServiceURL(2, this.loginType, this.productionMode),
+      loginType: this.loginType,
+      privateKey: this.privateKey,
+      publicKey: this.publicKey,
+      passPhrase: this.passPhrase,
       debug: this.debug,
     });
     this.accessWS = new ISDSSoapClient(getServiceWSDL(3), {
       login: this.loginName,
       password: this.password,
       location: getServiceURL(3, this.loginType, this.productionMode),
+      loginType: this.loginType,
+      privateKey: this.privateKey,
+      publicKey: this.publicKey,
+      passPhrase: this.passPhrase,
       debug: this.debug,
     });
     this.searchWS = new ISDSSoapClient(getServiceWSDL(4), {
       login: this.loginName,
       password: this.password,
       location: getServiceURL(4, this.loginType, this.productionMode),
+      loginType: this.loginType,
+      privateKey: this.privateKey,
+      publicKey: this.publicKey,
+      passPhrase: this.passPhrase,
       debug: this.debug,
     });
   }
