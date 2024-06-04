@@ -1,5 +1,5 @@
-import ISDSBox from './lib/ISDSBox.js';
-import DataMessage from './models/DataMessage.js';
+import ISDSBox from '../src/lib/ISDSBox.js';
+import DataMessage from '../src/models/DataMessage.js';
 
 // Replace these with actual values
 const loginname = '';

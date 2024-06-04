@@ -40,7 +40,10 @@ function getServiceURL(serviceType, loginType, productionMode) {
 function getServiceWSDL(serviceType) {
   const directory = path.join(
     path.dirname(new URL(import.meta.url).pathname),
-    '../../resources',
+    '..',
+    '..',
+    'resources',
+    'wsdl',
   );
   switch (serviceType) {
     case 0:

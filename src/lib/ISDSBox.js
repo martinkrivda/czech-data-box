@@ -234,10 +234,14 @@ class ISDSBox {
       dmFiles: files.build(), // Ensure dmFiles is correctly structured as an array
     };
 
-    console.log('Final SOAP Request Body:', JSON.stringify(input, null, 2));
-    //process.exit(1);
+    if (this.debug === true) {
+      console.log('Final SOAP Request Body:', JSON.stringify(input, null, 2));
+    }
     try {
       const result = await this.operationsWS.request('CreateMessage', input);
+      if (this.debug === true) {
+        console.log('Raw Result:', result);
+      }
 
       return result;
     } catch (error) {
@@ -257,7 +261,9 @@ class ISDSBox {
     const findInput = dbOwnerInfo.build();
     try {
       const result = await this.searchWS.request('FindDataBox', findInput);
-      console.log('Raw Result:', result);
+      if (this.debug === true) {
+        console.log('Raw Result:', result);
+      }
 
       return result;
     } catch (error) {

@@ -6,11 +6,10 @@ async function connectWithCertificate() {
   const pkcsContent = await fs.promises.readFile('./server_certificate.p12', {
     encoding: 'base64',
   });
-  console.log(pkcsContent);
 
   const isdsBox = new ISDSBox().loginWithPkcs12Certificate(
     pkcsContent,
-    'passphrase',
+    '',
     false,
   ); // Set to true for production environment
 
