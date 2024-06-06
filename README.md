@@ -10,7 +10,7 @@ This library is used for basic communication with the Information System for Dat
 
 ### Installation
 
-`npm install martinkrivda/czech-data-box`
+`npm install czech-data-box`
 
 ### Basic usage
 
