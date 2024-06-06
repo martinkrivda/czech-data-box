@@ -33,5 +33,7 @@ jobs:
           key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-${{ matrix.node }}
+      - name: Install dependencies
+        run: npm install
       - run: npm run lint
       - run: npm run test
