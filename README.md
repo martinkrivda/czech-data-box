@@ -1,6 +1,6 @@
 # Czech Data Box Library
 
-⭐ Star us on GitHub — it motivates us a lot!
+⭐ Star this project on GitHub — it motivates us a lot!
 
 A library that provides access to the Information Services Data System (ISDS) interface for third-party applications in Node.js
 
