@@ -1,4 +1,5 @@
 // config.js
+import os from 'os';
 import path from 'path';
 
 export const DEBUG = false; // Set to true to enable debug mode globally
@@ -38,13 +39,19 @@ function getServiceURL(serviceType, loginType, productionMode) {
 }
 
 function getServiceWSDL(serviceType) {
-  const directory = path.join(
+  let directory = path.join(
     path.dirname(new URL(import.meta.url).pathname),
     '..',
     '..',
     'resources',
     'wsdl',
   );
+
+  // Adjust the path for Windows
+  if (os.platform() === 'win32') {
+    directory = directory.slice(1);
+  }
+
   switch (serviceType) {
     case 0:
       return path.join(directory, 'dm_operations.wsdl');
