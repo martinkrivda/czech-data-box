@@ -1,0 +1,15 @@
+copilot:
+  content_exclusions:
+    - path: '.env*'
+    - path: '.claude/**'
+    - path: '.codex/**'
+    - path: '.tmp/**'
+    - path: 'coverage/**'
+    - path: 'dist/**'
+    - path: 'node_modules/**'
+    - path: 'docs/agent-context/**'
+    - path: '**/.DS_Store'
+    - path: '**/*.key'
+    - path: '**/*.pem'
+    - path: '**/*.p12'
+    - path: 'soap-request-debug.xml'

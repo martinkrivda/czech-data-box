@@ -1,57 +1,86 @@
 {
   "name": "czech-data-box",
   "version": "0.1.2",
-  "main": "src/index.js",
-  "type": "module",
-  "engines": {
-    "node": ">=18.0.0"
-  },
-  "scripts": {
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "test": "mocha"
-  },
-  "keywords": [
-    "ISDS",
-    "Czech",
-    "Data Box",
-    "SOAP",
-    "Node.js",
-    "library",
-    "knihovna",
-    "Datové schránky"
-  ],
-  "author": "Martin Křivda",
+  "description": "TypeScript-first Node.js client for Czech Data Boxes (ISDS).",
   "license": "MIT",
-  "description": "A Node.js module for interacting with the Czech Data Box system (ISDS).",
+  "author": "Martin Křivda",
+  "type": "module",
+  "private": false,
+  "packageManager": "pnpm@10.33.0+sha512.10568bb4a6afb58c9eb3630da90cc9516417abebd3fabbe6739f0ae795728da1491e9db5a544c76ad8eb7570f5c4bb3d6c637b2cb41bfdcdb47fa823c8649319",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "resources",
+    "LICENSE",
+    "README.md"
+  ],
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/martinkrivda/czech-data-box.git"
+    "url": "https://github.com/martinkrivda/czech-data-box"
   },
   "bugs": {
     "url": "https://github.com/martinkrivda/czech-data-box/issues"
   },
   "homepage": "https://github.com/martinkrivda/czech-data-box",
-  "directories": {
-    "lib": "./src/lib",
-    "test": "./test"
+  "engines": {
+    "node": ">=22.20.0 <25",
+    "pnpm": ">=10.33.0 <11"
   },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "changeset": "changeset",
+    "clean": "rimraf coverage dist .tmp",
+    "format": "prettier --check .",
+    "format:write": "prettier --write .",
+    "lint": "eslint .",
+    "prepack": "pnpm build",
+    "release": "changeset publish",
+    "test": "vitest run",
+    "test:package": "pnpm build && pnpm pack --pack-destination .tmp/pack",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "verify": "pnpm lint && pnpm typecheck && pnpm test && pnpm build",
+    "version-packages": "changeset version",
+    "prepare": "husky"
+  },
+  "keywords": [
+    "isds",
+    "czech-data-box",
+    "datove-schranky",
+    "soap",
+    "typescript",
+    "nodejs",
+    "node-library"
+  ],
   "dependencies": {
-    "node-forge": "^1.3.1",
-    "soap": "^1.0.3"
+    "node-forge": "^1.4.0",
+    "soap": "^1.8.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.4.0",
-    "@types/eslint__js": "^8.42.3",
-    "@types/eslint-plugin-mocha": "^10.4.0",
-    "@types/node-forge": "^1.3.11",
-    "@types/sinon": "^17.0.3",
-    "chai": "^5.1.1",
-    "eslint": "^9.4.0",
-    "eslint-plugin-mocha": "^10.4.3",
-    "globals": "^15.3.0",
-    "mocha": "^10.4.0",
-    "prettier": "^3.2.5",
-    "sinon": "^18.0.0"
+    "@changesets/cli": "^2.30.0",
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^25.6.0",
+    "@types/node-forge": "^1.3.14",
+    "eslint": "^10.2.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.5.0",
+    "husky": "^9.1.7",
+    "prettier": "^3.8.2",
+    "rimraf": "^6.1.3",
+    "typescript": "^6.0.2",
+    "typescript-eslint": "^8.58.1",
+    "vitest": "^4.1.4"
   }
 }

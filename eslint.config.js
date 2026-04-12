@@ -1,26 +1,68 @@
-import globals from 'globals';
-import pluginJs from '@eslint/js';
-import mocha from 'eslint-plugin-mocha'; // Ensure eslint-plugin-mocha is installed
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-export default [
+import js from '@eslint/js';
+import eslintConfigPrettier from 'eslint-config-prettier';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
+
+const tsconfigRootDir = path.dirname(fileURLToPath(import.meta.url));
+
+export default tseslint.config(
   {
-    ignores: ['node_modules/', 'dist/', 'coverage/', '*.min.js'], // Add your ignore patterns here
+    ignores: ['coverage/', 'dist/', 'node_modules/', '.tmp/'],
+  },
+  {
+    files: ['**/*.js'],
+    ...js.configs.recommended,
     languageOptions: {
+      ...js.configs.recommended.languageOptions,
       globals: {
         ...globals.node,
-        ...globals.mocha, // Add Mocha globals
       },
     },
   },
-  pluginJs.configs.recommended,
   {
-    plugins: {
-      mocha: mocha, // Ensure eslint-plugin-mocha is installed
+    files: ['**/*.ts'],
+    extends: [
+      js.configs.recommended,
+      ...tseslint.configs.strictTypeChecked,
+      ...tseslint.configs.stylisticTypeChecked,
+    ],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      globals: {
+        ...globals.node,
+      },
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir,
+      },
     },
     rules: {
-      // Add custom rules here
-      'linebreak-style': ['error', 'unix'],
-      'mocha/no-exclusive-tests': 'error', // Example custom rule
+      '@typescript-eslint/consistent-type-imports': [
+        'error',
+        {
+          fixStyle: 'inline-type-imports',
+          prefer: 'type-imports',
+        },
+      ],
+      '@typescript-eslint/no-confusing-void-expression': [
+        'error',
+        {
+          ignoreArrowShorthand: true,
+        },
+      ],
+      '@typescript-eslint/no-extraneous-class': 'off',
+      '@typescript-eslint/no-non-null-assertion': 'off',
     },
   },
-];
+  {
+    files: ['test/**/*.ts'],
+    rules: {
+      '@typescript-eslint/unbound-method': 'off',
+    },
+  },
+  eslintConfigPrettier,
+);

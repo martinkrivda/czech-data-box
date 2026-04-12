@@ -1,0 +1,22 @@
+WSDL a XSD definice služeb OB a AS webových služeb ISDS
+                        
+
+verze: 2
+datum nasazení na TEST: 10.9.2016
+datum nasazení na PRODUKCI: 10.9.2016
+============================================================
+
+verze: 3 (TS930 Osobní údaje v datové zprávì)
+datum nasazení na TEST: 5.6.2022
+datum nasazení na PRODUKCI: 5.6.2022
+============================================================
+
+verze: 4 (TS1079 Zavedení VoDZ v Odesílací bránì)
+datum nasazení na TEST: 3.10.2024
+datum nasazení na PRODUKCI: 3.10.2024
+============================================================
+
+
+
+
+  

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--  *********************************************************************
+     WSDL pro služby související s ExtIS2
+     
+                          verze 2.0
+      *********************************************************************                    
+Seznam služeb: 
+==============
+  SetConcept
+                          
+ změny:
+  5.11.2015 verze 0.1
+  15.1.2016 verze 0.2 pridano SetMultipleConcept
+  24.8.2016 verze 1.1 pridano GetPDZInfo
+  10.9.2024 verze 2.0 pridano SetBigConcept
+  ************************************************************************ -->
+
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="http://isds.czechpoint.cz/v20/koncept"
+             targetNamespace="http://isds.czechpoint.cz/v20/koncept">
+    <types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                    targetNamespace="http://isds.czechpoint.cz/v20/koncept">
+            <xsd:include schemaLocation="SetConcept.xsd"/>
+        </xsd:schema>
+    </types>
+    <message name="SetConcept">
+        <part element="tns:SetConcept" name="SetConcept">
+        </part>
+    </message>
+    <message name="SetConceptResponse">
+        <part element="tns:SetConceptResponse" name="SetConceptResponse">
+        </part>
+    </message>
+    <message name="SetMultipleConcept">
+        <part element="tns:SetMultipleConcept" name="SetMultipleConcept">
+        </part>
+    </message>
+    <message name="SetMultipleConceptResponse">
+        <part element="tns:SetMultipleConceptResponse" name="SetMultipleConceptResponse">
+        </part>
+    </message>
+    <message name="GetPDZInfo">
+        <part name="GetPDZInfo" element="tns:GetPDZInfo" />
+    </message>
+    <message name="GetPDZInfoResponse">
+        <part name="GetPDZInfoResponse" element="tns:GetPDZInfoResponse" />
+    </message>
+    <message name="SetBigConcept">
+        <part element="tns:SetBigConcept" name="SetBigConcept">
+        </part>
+    </message>
+    <message name="SetBigConceptResponse">
+        <part element="tns:SetBigConceptResponse" name="SetBigConceptResponse">
+        </part>
+    </message>
+    <portType name="SetConcept">
+        <operation name="SetConcept">
+            <input message="tns:SetConcept" name="SetConcept">
+            </input>
+            <output message="tns:SetConceptResponse" name="SetConceptResponse">
+            </output>
+        </operation>
+        <operation name="SetMultipleConcept">
+            <input message="tns:SetMultipleConcept" name="SetMultipleConcept">
+            </input>
+            <output message="tns:SetMultipleConceptResponse" name="SetMultipleConceptResponse">
+            </output>
+        </operation>
+        <operation name="GetPDZInfo">
+            <input  message="tns:GetPDZInfo" name="GetPDZInfo"/>
+            <output message="tns:GetPDZInfoResponse" name="GetPDZInfoResponse"/>
+        </operation>
+        <operation name="SetBigConcept">
+            <input message="tns:SetBigConcept" name="SetBigConcept">
+            </input>
+            <output message="tns:SetBigConceptResponse" name="SetBigConceptResponse">
+            </output>
+        </operation>
+    </portType>
+    <binding name="SetConceptSoap11" type="tns:SetConcept">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="SetConcept">
+            <soap:operation soapAction="SetConcept"/>
+            <input name="SetConcept">
+                <soap:body use="literal"/>
+            </input>
+            <output name="SetConceptResponse">
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="SetMultipleConcept">
+            <soap:operation soapAction="SetMultipleConcept"/>
+            <input name="SetMultipleConcept">
+                <soap:body use="literal"/>
+            </input>
+            <output name="SetMultipleConceptResponse">
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+
+        <operation name="GetPDZInfo">
+            <soap:operation soapAction="GetPDZInfo" />
+            <input name="GetPDZInfo">
+                <soap:body use="literal" />
+            </input>
+            <output name="GetPDZInfoResponse">
+                <soap:body use="literal" />
+            </output>
+        </operation>
+
+        <operation name="SetBigConcept">
+            <soap:operation soapAction="SetBigConcept"/>
+            <input name="SetBigConcept">
+                <soap:body use="literal"/>
+            </input>
+            <output name="SetBigConceptResponse">
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="SetKonceptService">
+        <port binding="tns:SetConceptSoap11" name="SetConceptSoap11">
+            <soap:address location="https://cert.mojedatovaschranka.cz/asws/konceptEndpoint"/>
+        </port>
+    </service>
+</definitions>

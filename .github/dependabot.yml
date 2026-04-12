@@ -1,0 +1,50 @@
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+      time: '08:00'
+      timezone: 'Europe/Prague'
+    open-pull-requests-limit: 8
+    rebase-strategy: 'auto'
+    versioning-strategy: 'increase-if-necessary'
+    commit-message:
+      prefix: 'deps'
+      include: 'scope'
+    groups:
+      production-dependencies:
+        dependency-type: 'production'
+      testing-and-quality:
+        patterns:
+          - '@eslint/js'
+          - 'eslint'
+          - 'eslint-*'
+          - 'prettier'
+          - 'vitest'
+          - 'globals'
+      build-and-release-tooling:
+        patterns:
+          - '@changesets/*'
+          - '@types/*'
+          - 'typescript'
+          - 'typescript-eslint'
+          - 'rimraf'
+
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+      time: '08:30'
+      timezone: 'Europe/Prague'
+    open-pull-requests-limit: 4
+    rebase-strategy: 'auto'
+    commit-message:
+      prefix: 'ci'
+      include: 'scope'
+    groups:
+      github-actions:
+        patterns:
+          - '*'

@@ -1,17 +1,10 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
+This file is managed by Changesets.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+## 0.1.2
 
-## [Unreleased]
+### Patch Changes
 
-### Added
-
-- basic simple funcionality
-- basic authentication to ISDS via username and password
-- send data message
-- fetch owner info from current login
-- get password expiration info
-- find data box via criteria
+- Initial JavaScript release with the core ISDS SOAP client, data-box lookup,
+  owner info lookup, password info lookup, and message creation helpers.
