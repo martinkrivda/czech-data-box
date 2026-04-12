@@ -294,6 +294,12 @@ This project follows SemVer through `Changesets`. Every user-facing change
 should ship with a changeset, and releases update
 [`CHANGELOG.md`](./CHANGELOG.md) automatically.
 
+## Credits
+
+- [Martin Křivda](https://github.com/martinkrivda)
+- [All Contributors](https://github.com/martinkrivda/czech-data-box/graphs/contributors)
+
 ## License
 
-[MIT](./LICENSE)
+This project is licensed under the MIT License. See the
+[LICENSE](./LICENSE) file for details.
