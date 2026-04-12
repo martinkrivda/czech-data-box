@@ -109,4 +109,32 @@ describe('ISDSSentOutFiles', () => {
       },
     ]);
   });
+
+  it('adds an outgoing file object directly', () => {
+    const sentOutFiles = new ISDSSentOutFiles();
+
+    sentOutFiles.addOutgoingFile({
+      dmEncodedContent: 'memory-content',
+      dmMimeType: 'text/plain',
+      dmFileMetaType: 'main',
+      dmFileDescr: 'note.txt',
+      dmFileGuid: 'guid-1',
+      dmUpFileGuid: 'parent-guid',
+      dmFormat: 'txt',
+    });
+
+    expect(sentOutFiles.build().dmFile).toEqual([
+      {
+        attributes: {
+          dmMimeType: 'text/plain',
+          dmFileMetaType: 'main',
+          dmFileDescr: 'note.txt',
+          dmFileGuid: 'guid-1',
+          dmUpFileGuid: 'parent-guid',
+          dmFormat: 'txt',
+        },
+        dmEncodedContent: 'memory-content',
+      },
+    ]);
+  });
 });

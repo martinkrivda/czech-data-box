@@ -264,6 +264,7 @@ Useful scripts:
 - `pnpm lint`
 - `pnpm typecheck`
 - `pnpm test`
+- `pnpm test:coverage`
 - `pnpm test:watch`
 - `pnpm build`
 - `pnpm test:package`

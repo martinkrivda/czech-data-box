@@ -22,6 +22,7 @@ pnpm verify
 - `pnpm lint` runs ESLint.
 - `pnpm typecheck` runs strict TypeScript checks without emitting files.
 - `pnpm test` runs Vitest once.
+- `pnpm test:coverage` runs Vitest with V8 coverage reporting and thresholds.
 - `pnpm test:watch` runs Vitest in watch mode.
 - `pnpm build` emits the package into `dist/`.
 
@@ -32,7 +33,8 @@ tool. The package is not UI-driven, so the highest-value feedback loop is:
 
 1. strict typecheck
 2. fast unit tests with Vitest
-3. packaging smoke test from the generated tarball
+3. coverage verification with `pnpm test:coverage`
+4. packaging smoke test from the generated tarball
 
 Create a tarball exactly as consumers will receive it:
 

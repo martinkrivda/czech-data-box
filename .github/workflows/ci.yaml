@@ -44,5 +44,9 @@ jobs:
       - name: Test
         run: pnpm test
 
+      - name: Coverage
+        if: matrix.node-version == '24.14.1'
+        run: pnpm test:coverage
+
       - name: Build
         run: pnpm build
