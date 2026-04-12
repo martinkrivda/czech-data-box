@@ -1,6 +1,6 @@
 {
   "name": "czech-data-box",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "TypeScript-first Node.js client for Czech Data Boxes (ISDS).",
   "license": "MIT",
   "author": "Martin Křivda",
